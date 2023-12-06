@@ -35,10 +35,11 @@ public class Cloud : MonoBehaviour
 
     public GameObject spawnObject(Vector3 position, int size)
     {
-        GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
-        a.transform.SetParent(gameObject.transform, true);
+        GameObject a = ObjectPool.instance.GetFromPool();
+        //GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
         a.GetComponent<Rigidbody2D>().isKinematic = true;
-        a.GetComponent<Fruit>().spawnSetup(size);    
+        a.GetComponent<Fruit>().spawnSetup(size, position);
+        a.transform.SetParent(gameObject.transform, true);  
         Debug.Log("Spawn object " + size);
         return a;
     }

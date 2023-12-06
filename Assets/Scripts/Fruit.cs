@@ -10,8 +10,8 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof (SpriteRenderer))]
 public class Fruit : MonoBehaviour
 {
-    private int size;
-    private bool isMerged;
+    [SerializeField] private int size;
+    [SerializeField] private bool isMerged;
     private SpriteRenderer spriteRenderer;
     void Awake()
     {
@@ -19,7 +19,6 @@ public class Fruit : MonoBehaviour
         Debug.Log("get sprite renderer");
         isMerged = false;
     }
-
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,6 +28,7 @@ public class Fruit : MonoBehaviour
             if(fruit2.getSize() == getSize() && isMerged == false)
             {
                 updateIsMerged();
+
                 fruit2.updateIsMerged(); 
                 MergeObject(gameObject, collision.gameObject, getSize());
             }
@@ -41,8 +41,10 @@ public class Fruit : MonoBehaviour
     {
  
         Vector3 middlePoint = Vector3.Lerp(a.transform.position, b.transform.position, 0.5f);
-        Destroy(a);
-        Destroy(b);
+        //Destroy(a);
+        //Destroy(b);
+        a.SetActive(false);
+        b.SetActive(false);
         await Task.Delay(500);
         if (DataStorage.instance.fruits[size + 1] != null)
             spawnObject(middlePoint, size + 1);
@@ -52,16 +54,19 @@ public class Fruit : MonoBehaviour
 
     public void spawnObject(Vector3 position, int size)
     {
-        GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
-        a.GetComponent<Fruit>().spawnSetup(size);
+        //GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
+        GameObject a = ObjectPool.instance.GetFromPool();
+        a.GetComponent<Fruit>().spawnSetup(size, position);
         Debug.Log("Spawn object " + size);
     }
 
-    public void spawnSetup(int size)
+    public void spawnSetup(int size, Vector3 position)
     {
+        setPosition(position);
         setSize(size);
         setScale(size);
         setSkin(size);
+        isMerged = false;
     }
     private void updateIsMerged()
     {
@@ -71,6 +76,10 @@ public class Fruit : MonoBehaviour
     public int getSize()
     {
         return size;
+    }
+    public void setPosition(Vector3 position)
+    {
+        transform.position = position;
     }
     public void setSize(int size)
     {
@@ -91,6 +100,8 @@ public class Fruit : MonoBehaviour
         setGlobalScale(transform, new Vector3(a, a, a));
         Debug.Log("set scale " + a);
     }
+
+
 
     public void setGlobalScale(Transform transform, Vector3 globalScale)
     {
