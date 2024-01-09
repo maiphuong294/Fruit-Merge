@@ -1,28 +1,26 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Cloud : MonoBehaviour
 {
-    private GameObject holdPoint;
-    private GameObject holdingObject;
+    public static Cloud instance { get; private set; }
+    [SerializeField] private GameObject holdPoint;
+    private Fruit holdingFruit;
     private float distFromHoldPoint;
-    void Start()
+
+    private void Awake()
     {
-        holdPoint = transform.Find("Hold Point").gameObject;
-        distFromHoldPoint = transform.position.x - holdPoint.transform.position.x;
-        holdingObject = spawnObject(holdPoint.transform.position, 1);
+        instance = this;
     }
-    public static bool IsOverUI()
+
+    private void Start()
     {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
-        return results.Count > 0;
+        holdingFruit = SpawnFruit(holdPoint.transform.position, 1);
+        distFromHoldPoint = transform.position.x - holdPoint.transform.position.x;
     }
 
     public Vector3 getMousePos()
@@ -33,29 +31,43 @@ public class Cloud : MonoBehaviour
         return mousePosWorld;
     }
 
-    public GameObject spawnObject(Vector3 position, int size)
+    public Fruit SpawnFruit(Vector3 position, int size)
     {
-        GameObject a = ObjectPool.instance.GetFromPool();
-        //GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
-        a.GetComponent<Rigidbody2D>().isKinematic = true;
-        a.GetComponent<Fruit>().spawnSetup(size, position);
-        a.transform.SetParent(gameObject.transform, true);  
+        GameObject fruitObject = ObjectPool.instance.GetFromPool();
+        Fruit fruit = fruitObject.GetComponent<Fruit>();
+        fruit.Attach(this.transform);
+        fruit.spawnSetup(size, position);
         Debug.Log("Spawn object " + size);
-        return a;
+        return fruit;
     }
 
-    public async void dropObject()
+    public async void DropObject()
     {
-        if (holdingObject == null) return;
-        holdingObject.transform.SetParent(null);
-        holdingObject.GetComponent<Rigidbody2D>().isKinematic = false;
-        holdingObject = null;
+        if (holdingFruit == null)
+            return;
+
+        if (!holdingFruit.CanDrop)
+            return;
+
+        holdingFruit.Drop();
+        holdingFruit = null;
+
         await Task.Delay(400);
-        holdingObject = spawnObject(holdPoint.transform.position, UnityEngine.Random.Range(1, 4));
+
+        holdingFruit = SpawnFruit(holdPoint.transform.position, UnityEngine.Random.Range(1, 4));
     }
     public void followMouse()
     {
         Vector3 targetPos = new Vector3(getMousePos().x + distFromHoldPoint, transform.position.y, 0f);
         transform.position = targetPos;
     }
+    public static bool IsOverUI()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
+
 }

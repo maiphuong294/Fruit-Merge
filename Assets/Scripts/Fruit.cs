@@ -1,22 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
+using DG.Tweening;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-[RequireComponent(typeof (SpriteRenderer))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Fruit : MonoBehaviour
 {
     [SerializeField] private int size;
     [SerializeField] private bool isMerged;
+
+    private Rigidbody2D rigidBody;
+
+    public bool CanDrop { get; private set; }
+
     private SpriteRenderer spriteRenderer;
+
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Debug.Log("get sprite renderer");
+        rigidBody = GetComponent<Rigidbody2D>();
         isMerged = false;
     }
 
@@ -25,48 +27,43 @@ public class Fruit : MonoBehaviour
         if (collision.gameObject.CompareTag("Fruit"))
         {
             Fruit fruit2 = collision.gameObject.GetComponent<Fruit>();
-            if(fruit2.getSize() == getSize() && isMerged == false)
+            if (fruit2.getSize() == getSize() && isMerged == false)
             {
                 updateIsMerged();
-
-                fruit2.updateIsMerged(); 
+                fruit2.updateIsMerged();
                 MergeObject(gameObject, collision.gameObject, getSize());
             }
-            
-            
         }
     }
 
-    public async void MergeObject(GameObject a, GameObject b, int size)
+    public void MergeObject(GameObject a, GameObject b, int size)
     {
- 
         Vector3 middlePoint = Vector3.Lerp(a.transform.position, b.transform.position, 0.5f);
         //Destroy(a);
         //Destroy(b);
         a.SetActive(false);
         b.SetActive(false);
-        await Task.Delay(500);
         if (DataStorage.instance.fruits[size + 1] != null)
             spawnObject(middlePoint, size + 1);
     }
-
-
 
     public void spawnObject(Vector3 position, int size)
     {
         //GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
         GameObject a = ObjectPool.instance.GetFromPool();
         a.GetComponent<Fruit>().spawnSetup(size, position);
-        Debug.Log("Spawn object " + size);
     }
 
     public void spawnSetup(int size, Vector3 position)
     {
+        isMerged = false;
         setPosition(position);
         setSize(size);
-        setScale(size);
         setSkin(size);
-        isMerged = false;
+        setScale(size);
+        ScoreManager.instance.AddScore(size * 3);
+        Messenger.FireEvent(EventKey.OnCurrentScoreChange);
+        
     }
     private void updateIsMerged()
     {
@@ -89,25 +86,51 @@ public class Fruit : MonoBehaviour
 
     public void setSkin(int size)
     {
-        Debug.Log("setSkin" + size);
         Sprite a = DataStorage.instance.fruits[size];
         spriteRenderer.sprite = a;
-        //bug o day
     }
     public void setScale(int size)
     {
+        //size a la localscale
         float a = DataStorage.instance.sizes[size];
-        setGlobalScale(transform, new Vector3(a, a, a));
-        Debug.Log("set scale " + a);
+        setGlobalScale(new Vector3(a, a, a));
+
     }
 
-
-
-    public void setGlobalScale(Transform transform, Vector3 globalScale)
+    public void setGlobalScale(Vector3 globalScale)
     {
-        transform.localScale = Vector3.one;
-        transform.localScale = new Vector3(globalScale.x / transform.lossyScale.x, globalScale.y / transform.lossyScale.y, globalScale.z / transform.lossyScale.z);
+        //transform.localScale = Vector3.one;
+        Vector3 target;
+        if (transform.parent != null)
+        {
+            Vector3 parent = transform.parent.localScale;
+            target = new Vector3(globalScale.x / parent.x, globalScale.y / parent.y, globalScale.z / parent.z);
+        }
+        else
+        {
+            //Debug.Log("Parent==null, use target global scale".Color("cyan"));
+            target = globalScale;
+        }
+
+        Debug.Log("global".Color("yellow") + globalScale + "target".Color("red") + target, gameObject);
+        transform.DOKill();
+        transform.localScale = Vector3.zero;
+        transform.DOScale(target, 0.2f)
+            .SetEase(Ease.OutCubic)
+            .OnComplete(() => CanDrop = true);
+
+        //Debug.Break();
     }
 
+    public void Attach(Transform parent)
+    {
+        transform.SetParent(parent);
+        rigidBody.isKinematic = true;
+    }
 
+    public void Drop()
+    {
+        transform.parent = null;
+        rigidBody.isKinematic = false;
+    }
 }
