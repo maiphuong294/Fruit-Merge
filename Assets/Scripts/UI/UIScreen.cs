@@ -30,5 +30,4 @@ public class UIScreen : MonoBehaviour
         gameObject.SetActive(false);
         canvasGroup.DOFade(0f, 0.2f);
     }
-
 }
