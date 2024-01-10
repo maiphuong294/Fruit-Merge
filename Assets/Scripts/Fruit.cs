@@ -39,15 +39,22 @@ public class Fruit : MonoBehaviour
     public void MergeObject(GameObject a, GameObject b, int size)
     {
         Vector3 middlePoint = Vector3.Lerp(a.transform.position, b.transform.position, 0.5f);
-        //Destroy(a);
-        //Destroy(b);
         a.SetActive(false);
         b.SetActive(false);
         if (DataStorage.instance.fruits[size + 1] != null)
-            spawnObject(middlePoint, size + 1);
+            SpawnObject(middlePoint, size + 1);
     }
 
-    public void spawnObject(Vector3 position, int size)
+    //up 1 size
+    public void UpgradeObject()
+    {
+        Vector3 middlePoint = transform.position;  
+        if (DataStorage.instance.fruits[size + 1] != null)
+            SpawnObject(middlePoint, size + 1);
+        gameObject.SetActive(false);
+    }
+
+    public void SpawnObject(Vector3 position, int size)
     {
         //GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
         GameObject a = ObjectPool.instance.GetFromPool();

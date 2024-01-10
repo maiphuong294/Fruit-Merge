@@ -14,11 +14,12 @@ public class Popup : MonoBehaviour
     public void Open()
     {
         greyBackground.SetActive(true);
-        gameObject.transform.DOScale(Vector3.one, 0.3f);
+        gameObject.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.InBounce);
+        
     }
     public void Close()
     {
         greyBackground.SetActive(false);
-        gameObject.transform.DOScale(Vector3.zero, 0.3f); 
+        gameObject.transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutBounce); 
     }
 }

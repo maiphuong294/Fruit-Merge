@@ -45,5 +45,18 @@ public class ObjectPool : MonoBehaviour
         return a;
     }
 
+    public List<GameObject> GetActiveObjects()
+    {
+        List<GameObject> list = new List<GameObject>();
+        foreach (var obj in pool)
+        {
+            if (obj.activeSelf)
+            {
+                list.Add(obj);
+            }
+        }
+        return list;
+    } 
+
     
 }

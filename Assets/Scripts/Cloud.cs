@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class Cloud : MonoBehaviour
 {
     public static Cloud instance { get; private set; }
+    public bool IsHolding { get; private set; }
+    public Fruit HoldingFruit { get; private set; }
     [SerializeField] private GameObject holdPoint;
-    private Fruit holdingFruit;
     private float distFromHoldPoint;
 
     private void Awake()
@@ -19,7 +20,8 @@ public class Cloud : MonoBehaviour
 
     private void Start()
     {
-        holdingFruit = SpawnFruit(holdPoint.transform.position, 1);
+        HoldingFruit = SpawnFruit(holdPoint.transform.position, 1);
+        SetHolding(true);
         distFromHoldPoint = transform.position.x - holdPoint.transform.position.x;
     }
 
@@ -43,18 +45,20 @@ public class Cloud : MonoBehaviour
 
     public async void DropObject()
     {
-        if (holdingFruit == null)
+        if (HoldingFruit == null)
             return;
 
-        if (!holdingFruit.CanDrop)
+        if (!HoldingFruit.CanDrop)
             return;
 
-        holdingFruit.Drop();
-        holdingFruit = null;
+        HoldingFruit.Drop();
+        HoldingFruit = null;
+        SetHolding(false);
 
         await Task.Delay(400);
 
-        holdingFruit = SpawnFruit(holdPoint.transform.position, UnityEngine.Random.Range(1, 4));
+        HoldingFruit = SpawnFruit(holdPoint.transform.position, UnityEngine.Random.Range(1, 4));
+        SetHolding(true);
     }
     public void followMouse()
     {
@@ -68,6 +72,21 @@ public class Cloud : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
+    }
+
+    public void SetHolding(bool isHolding)
+    {
+        if (isHolding)
+        {
+            IsHolding = true;
+            HoldingFruit = HoldingFruit;
+        }
+        else
+        {
+            IsHolding = false;
+            HoldingFruit = null;
+        }
+        
     }
 
 }
