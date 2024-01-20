@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayScreen : UIScreen
 {
     public TextMeshProUGUI currentScore;
+    
     public void Start()
     {
         Messenger.AddListener(EventKey.OnCurrentScoreChange, UpdateCurrentScore);
+
     }
 
     public void Hide()
@@ -18,6 +20,7 @@ public class PlayScreen : UIScreen
     public void Appear()
     {
         base.Appear();
+
     }
     public void DisAppear()
     {

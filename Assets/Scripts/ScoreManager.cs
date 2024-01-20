@@ -13,6 +13,7 @@ public class ScoreManager : MonoBehaviour
     }
     public void Start()
     {
+        Application.targetFrameRate = 60;
         currentScore = 0;
         bestScore = 0;// = playerprefs.getHighScore
     }

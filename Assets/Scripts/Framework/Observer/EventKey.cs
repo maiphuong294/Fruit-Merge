@@ -1,6 +1,8 @@
 public enum EventKey : byte
 {
     OnOpenPanel,
-    OnCurrentScoreChange
+    OnCurrentScoreChange,
+    OnGameOver,
+    OnPlayGame
 
 }

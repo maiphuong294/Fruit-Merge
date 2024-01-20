@@ -20,5 +20,6 @@ public class UIManager : Singleton<UIManager>
     {
         homeScreen.Hide();
         playScreen.Appear();
+        Messenger.FireEvent(EventKey.OnPlayGame);
     }
 }
