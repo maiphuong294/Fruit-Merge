@@ -33,8 +33,7 @@ public class WarningLine : MonoBehaviour
             else
             {
                 UpAlpha();
-            }
-            Debug.Log(spriteRenderer.color.a);      
+            } 
         }
         
         if(duration > 3f)
@@ -52,6 +51,7 @@ public class WarningLine : MonoBehaviour
         else
         {
             duration = 0f;
+            UpAlpha();
         }
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -81,6 +81,7 @@ public class WarningLine : MonoBehaviour
     {
         IsChecking = true;
         fadeDirection = false;
+        duration = 0f;
 
         Color c = spriteRenderer.color;
         c.a = 1f;

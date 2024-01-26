@@ -20,5 +20,6 @@ public class DataStorage : MonoBehaviour
     public void Awake()
     {
         instance = this;
+        Debug.Log(Application.persistentDataPath);
     }
 }

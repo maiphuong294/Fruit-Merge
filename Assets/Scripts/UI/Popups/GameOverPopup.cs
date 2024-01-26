@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameOverPopup : Popup
 {
+    [SerializeField] private TextMeshProUGUI currentScoreText;
     public void Awake()
     {
+        Messenger.AddListener(EventKey.OnGameOver, UpdateCurrentScore);
         Messenger.AddListener(EventKey.OnGameOver, Open);
     }
     public void OnReplayButton()
-    {    
+    {
+        //Debug.Log("chay den day truoc");
         base.Close();
-        //Messenger.FireEvent(EventKey.OnPlayGame); -> cai nay dung de cap nhat ischecking cho warningline
+        //Debug.Log("chay den day");
+        Messenger.FireEvent(EventKey.OnPlayGame);// -> cai nay dung de cap nhat ischecking cho warningline
+        //Debug.Log("roi chay den day");
         DestroyAllBalls();  
         //reset everything    
     }
@@ -32,5 +38,10 @@ public class GameOverPopup : Popup
         {
             obj.SetActive(false);
         }
+    }
+
+    public void UpdateCurrentScore()
+    {
+        currentScoreText.SetText(ScoreManager.instance.currentScore.ToString());
     }
 }

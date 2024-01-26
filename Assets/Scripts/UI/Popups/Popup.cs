@@ -21,8 +21,9 @@ public class Popup : MonoBehaviour
     }
     public void Close()
     {
+        Debug.Log("close popup");
         greyBackground.SetActive(false);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         gameObject.transform.DOScale(Vector3.zero, 0.3f)
             .SetEase(Ease.InBack); 
     }
