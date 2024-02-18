@@ -86,7 +86,7 @@ public class PlayerDataManager : MonoBehaviour
 
     public void OnApplicationPause(bool isPaused)
     {
-        if(!isPaused) SaveData();
+        if(isPaused) SaveData();
         Debug.Log("application pause");
     }
 }

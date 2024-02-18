@@ -12,14 +12,14 @@ public class Popup : MonoBehaviour
         gameObject.transform.localScale = Vector3.zero;
     }
 
-    public void Open()
+    public virtual void Open()
     {
         greyBackground.SetActive(true); 
         gameObject.transform.DOScale(Vector3.one, 0.3f)
             .SetEase(Ease.OutBack);
-        
+        AudioManager.instance.PlaySound(AudioManager.instance.popup);
     }
-    public void Close()
+    public virtual void Close()
     {
         Debug.Log("close popup");
         greyBackground.SetActive(false);

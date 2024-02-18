@@ -11,10 +11,17 @@ public class GameOverPopup : Popup
         Messenger.AddListener(EventKey.OnGameOver, UpdateCurrentScore);
         Messenger.AddListener(EventKey.OnGameOver, Open);
     }
+    public override void Open()
+    {
+        base.Open();
+        AudioManager.instance.PlaySound(AudioManager.instance.gameOver);
+        AudioManager.instance.StopMusic();
+    }
     public void OnReplayButton()
     {
         base.Close();
         Messenger.FireEvent(EventKey.OnPlayGame);
+        AudioManager.instance.PlayMusic(AudioManager.instance.playMusic);
         DestroyAllBalls();  
     }
     public void OnAdsButton()

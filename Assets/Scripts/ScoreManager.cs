@@ -19,6 +19,12 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int score)
     {
         currentScore += score;
+        Messenger.FireEvent(EventKey.OnCurrentScoreChange);
+    }
+    public void ResetScore()
+    {
+        currentScore = 0;
+        Messenger.FireEvent(EventKey.OnCurrentScoreChange);
     }
     public int GetCurrentScore() => currentScore;
  

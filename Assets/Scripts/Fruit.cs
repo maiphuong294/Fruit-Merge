@@ -69,7 +69,7 @@ public class Fruit : MonoBehaviour
         setSkin(size);
         setScale(size);
         ScoreManager.instance.AddScore(size * 3);
-        Messenger.FireEvent(EventKey.OnCurrentScoreChange);
+        
         
     }
     private void updateIsMerged()
