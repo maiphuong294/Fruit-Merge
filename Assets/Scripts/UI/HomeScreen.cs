@@ -1,20 +1,20 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HomeScreen : UIScreen
 {
-    public void Hide()
+    public TextMeshProUGUI bestScore;
+    public override void Awake()
     {
-        base.Hide();
+        base.Awake();
+        Messenger.AddListener(EventKey.OnBestScoreChange, UpdateBestScore);
     }
-    public void Appear()
+
+    public void UpdateBestScore()
     {
-        base.Appear();
-    }
-    public void DisAppear()
-    {
-        base.DisAppear();
+        bestScore.SetText(PlayerDataManager.instance.playerData.bestScore.ToString());
     }
 }

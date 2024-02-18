@@ -6,7 +6,6 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance { get; private set; }
     public int currentScore;
-    public int bestScore;
     public void Awake()
     {
         instance = this; 
@@ -15,7 +14,6 @@ public class ScoreManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         currentScore = 0;
-        bestScore = 0;// = playerprefs.getHighScore
     }
 
     public void AddScore(int score)
@@ -23,10 +21,7 @@ public class ScoreManager : MonoBehaviour
         currentScore += score;
     }
     public int GetCurrentScore() => currentScore;
-    public void UpdateBestScore()
-    {
-        bestScore = (currentScore > bestScore) ? currentScore : bestScore;
-    }
+ 
     
 
 

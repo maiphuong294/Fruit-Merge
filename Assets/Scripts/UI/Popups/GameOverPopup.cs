@@ -13,13 +13,9 @@ public class GameOverPopup : Popup
     }
     public void OnReplayButton()
     {
-        //Debug.Log("chay den day truoc");
         base.Close();
-        //Debug.Log("chay den day");
-        Messenger.FireEvent(EventKey.OnPlayGame);// -> cai nay dung de cap nhat ischecking cho warningline
-        //Debug.Log("roi chay den day");
+        Messenger.FireEvent(EventKey.OnPlayGame);
         DestroyAllBalls();  
-        //reset everything    
     }
     public void OnAdsButton()
     {

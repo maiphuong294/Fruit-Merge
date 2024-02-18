@@ -8,7 +8,7 @@ public class UIScreen : MonoBehaviour
 {
    
     public CanvasGroup canvasGroup;
-    public void Awake()
+    public virtual void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }

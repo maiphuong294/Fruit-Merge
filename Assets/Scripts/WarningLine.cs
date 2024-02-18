@@ -10,7 +10,7 @@ public class WarningLine : MonoBehaviour
     public float fadeRate = 0.3f;
     public bool fadeDirection = false;
     public int numOfCollidingObjects;
-    public bool IsChecking { get; private set; }
+    [SerializeField] public bool IsChecking;
     [SerializeField] private Color color;
     private SpriteRenderer spriteRenderer;
     public void Start()
@@ -38,8 +38,10 @@ public class WarningLine : MonoBehaviour
         
         if(duration > 3f)
         {
-            Messenger.FireEvent(EventKey.OnGameOver);
             Debug.Log("ON GAME OVER");
+            Messenger.FireEvent(EventKey.OnGameOver);
+            Debug.Log("ON GAME OVER 2");
+            print(IsChecking);
             IsChecking = false;
             return;
         }
