@@ -18,11 +18,15 @@ public class PlayerDataManager : MonoBehaviour
     }
     public void Start()
     {
-        Messenger.AddListener(EventKey.OnGameOver, UpdateGoldData);
         Messenger.AddListener(EventKey.OnPlayGame, UpdateBestScoreData);
         LoadData();
         Messenger.FireEvent(EventKey.OnGoldChange);
         Messenger.FireEvent(EventKey.OnBestScoreChange);
+        for (int i = 0; i < 4; i++)
+        {
+            Messenger.FireEvent(EventKey.OnNumOfSuppliesChange, i);
+            print("fire event onNumofSupplies change");
+        }
     }
 
 
@@ -35,7 +39,7 @@ public class PlayerDataManager : MonoBehaviour
         playerData.bestScore = 0;
         for(int i = 0; i < playerData.numOfSupplies.Length; i++)
         {
-            playerData.numOfSupplies[i] = 0;
+            playerData.numOfSupplies[i] = 1;
         }
         for(int i = 0; i < playerData.settings.Length; i++)
         {
@@ -44,9 +48,9 @@ public class PlayerDataManager : MonoBehaviour
         print("init new player data");
     }
 
-    public void UpdateGoldData()
+    public void UpdateGoldData(int amount)
     {
-        playerData.gold += ScoreManager.instance.currentScore / 10;
+        playerData.gold += amount;
         print("update gold data");
         Messenger.FireEvent(EventKey.OnGoldChange);
     }
@@ -55,6 +59,13 @@ public class PlayerDataManager : MonoBehaviour
         int currentScore = ScoreManager.instance.currentScore;
         playerData.bestScore = (currentScore > playerData.bestScore) ? currentScore : playerData.bestScore;
         Messenger.FireEvent(EventKey.OnBestScoreChange);
+    }
+    public void UpdateNumOfSuppliesData(int index, bool isAdded)
+    {
+        if (isAdded)
+            playerData.numOfSupplies[index] += 1;
+        else playerData.numOfSupplies[index] -= 1;
+        Messenger.FireEvent(EventKey.OnNumOfSuppliesChange, index);
     }
 
     #endregion

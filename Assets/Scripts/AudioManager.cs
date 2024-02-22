@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip dropObject;
     public AudioClip mergeObject;
     public AudioClip popup;
+    public AudioClip coin;
 
     public void Awake()
     {

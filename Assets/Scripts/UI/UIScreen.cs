@@ -8,10 +8,6 @@ public class UIScreen : MonoBehaviour
 {
    
     public CanvasGroup canvasGroup;
-    public virtual void Awake()
-    {
-        canvasGroup = GetComponent<CanvasGroup>();
-    }
     
     public void Hide()
     {

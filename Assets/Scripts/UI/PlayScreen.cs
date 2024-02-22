@@ -8,16 +8,16 @@ public class PlayScreen : UIScreen
 {
     public TextMeshProUGUI currentScore;
     public TextMeshProUGUI gold;
-    public override void Awake()
+    public TextMeshProUGUI[] numOfSupplies = new TextMeshProUGUI[5];
+    public void Awake()
     {
-        base.Awake();
         Messenger.AddListener(EventKey.OnGoldChange, UpdateGoldText);
+        Messenger.AddListener<int>(EventKey.OnNumOfSuppliesChange, UpdateNumOfSuppliesText);
     }
 
     public void Start()
     {
         Messenger.AddListener(EventKey.OnCurrentScoreChange, UpdateCurrentScore);
-        
     }
 
     public void UpdateCurrentScore()
@@ -27,7 +27,14 @@ public class PlayScreen : UIScreen
     public void UpdateGoldText()
     {
         gold.SetText(PlayerDataManager.instance.playerData.gold.ToString());
-        print("update gold text");
+    }
+
+    public void UpdateNumOfSuppliesText(int index)
+    {
+        int num = PlayerDataManager.instance.playerData.numOfSupplies[index];
+        numOfSupplies[index].SetText(num.ToString());
+        print("update num of supplies text " + num);
+        print(num);
     }
 
 }

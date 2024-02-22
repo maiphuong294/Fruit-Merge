@@ -1,10 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class DestroyPopup : Popup
 {
+    public GameObject confirmButton;
+    public CanvasGroup confirmButtonCanvasGroup;
+    public void Awake()
+    {
+        confirmButtonCanvasGroup = confirmButton.GetComponent<CanvasGroup>();
+    }
+    public override void Open()
+    {
+        if (PlayerDataManager.instance.playerData.numOfSupplies[0] < 1)
+        {
+            confirmButtonCanvasGroup.interactable = false;
+        }
+        else
+        {
+            confirmButtonCanvasGroup.interactable = true;
+        }
+        base.Open();
+    }
     public void OnCancelButton()
     {
         base.Close();
@@ -13,6 +30,7 @@ public class DestroyPopup : Popup
     {
         base.Close();
         Destroy();
+        PlayerDataManager.instance.UpdateNumOfSuppliesData(0, false);
     }
     public void Destroy()
     {
@@ -31,4 +49,5 @@ public class DestroyPopup : Popup
             list[i].SetActive(false);
         }
     }
+
 }

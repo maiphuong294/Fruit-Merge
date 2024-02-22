@@ -529,7 +529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -40, y: -30}
+  m_AnchoredPosition: {x: -50, y: -70}
   m_SizeDelta: {x: 257, y: 54}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &39088291
@@ -2007,7 +2007,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39b2367b814377841b4a9a6097e4884a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 0}
+  canvasGroup: {fileID: 142058439}
 --- !u!1 &148990320
 GameObject:
   m_ObjectHideFlags: 0
@@ -4640,6 +4640,7 @@ GameObject:
   - component: {fileID: 376748973}
   - component: {fileID: 376748972}
   - component: {fileID: 376748971}
+  - component: {fileID: 376748974}
   m_Layer: 5
   m_Name: Confirm Button
   m_TagString: Untagged
@@ -4762,6 +4763,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376748969}
   m_CullTransparentMesh: 1
+--- !u!225 &376748974
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376748969}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &379062515
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,6 +5925,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greyBackground: {fileID: 1096523152}
+  confirmButton: {fileID: 1392942795}
+  confirmButtonCanvasGroup: {fileID: 0}
 --- !u!114 &470812221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6700,6 +6715,7 @@ GameObject:
   - component: {fileID: 520690372}
   - component: {fileID: 520690371}
   - component: {fileID: 520690370}
+  - component: {fileID: 520690373}
   m_Layer: 5
   m_Name: Confirm Button
   m_TagString: Untagged
@@ -6822,6 +6838,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 520690368}
   m_CullTransparentMesh: 1
+--- !u!225 &520690373
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520690368}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &520855893
 GameObject:
   m_ObjectHideFlags: 0
@@ -10918,6 +10946,7 @@ GameObject:
   - component: {fileID: 833574576}
   - component: {fileID: 833574575}
   - component: {fileID: 833574574}
+  - component: {fileID: 833574577}
   m_Layer: 5
   m_Name: Confirm Button
   m_TagString: Untagged
@@ -11040,6 +11069,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833574572}
   m_CullTransparentMesh: 1
+--- !u!225 &833574577
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833574572}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &845114426
 GameObject:
   m_ObjectHideFlags: 0
@@ -11528,6 +11569,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greyBackground: {fileID: 1096523152}
+  confirmButton: {fileID: 833574572}
+  confirmButtonCanvasGroup: {fileID: 0}
 --- !u!1 &878019986
 GameObject:
   m_ObjectHideFlags: 0
@@ -14492,6 +14535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greyBackground: {fileID: 1096523152}
+  confirmButton: {fileID: 376748969}
+  confirmButtonCanvasGroup: {fileID: 0}
 --- !u!114 &1128932746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15186,6 +15231,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   greyBackground: {fileID: 1096523152}
+  confirmButton: {fileID: 520690368}
+  confirmButtonCanvasGroup: {fileID: 0}
 --- !u!114 &1172825105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16149,7 +16196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04b79153516577428a9973ab272fdb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 0}
+  canvasGroup: {fileID: 1256127169}
   bestScore: {fileID: 1017445801}
 --- !u!1 &1273959369
 GameObject:
@@ -17435,6 +17482,7 @@ GameObject:
   - component: {fileID: 1392942799}
   - component: {fileID: 1392942798}
   - component: {fileID: 1392942797}
+  - component: {fileID: 1392942800}
   m_Layer: 5
   m_Name: Confirm Button
   m_TagString: Untagged
@@ -17557,6 +17605,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392942795}
   m_CullTransparentMesh: 1
+--- !u!225 &1392942800
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392942795}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1409424202
 GameObject:
   m_ObjectHideFlags: 0
@@ -20073,17 +20133,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 50
-    m_Right: 50
+    m_Left: 30
+    m_Right: 30
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 300, y: 500}
   m_Spacing: {x: 25, y: 25}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 3
 --- !u!1 &1605285139
 GameObject:
   m_ObjectHideFlags: 0
@@ -21801,9 +21861,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9632d06fe05485947bee6e00343f91bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 0}
+  canvasGroup: {fileID: 1801956199}
   currentScore: {fileID: 608384423}
   gold: {fileID: 355666315}
+  numOfSupplies:
+  - {fileID: 1424504124}
+  - {fileID: 1092765528}
+  - {fileID: 1887316245}
+  - {fileID: 2055888490}
+  - {fileID: 0}
 --- !u!1 &1803181013
 GameObject:
   m_ObjectHideFlags: 0

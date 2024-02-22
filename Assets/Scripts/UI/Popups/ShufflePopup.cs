@@ -4,6 +4,24 @@ using UnityEngine;
 
 public class ShufflePopup : Popup
 {
+    public GameObject confirmButton;
+    public CanvasGroup confirmButtonCanvasGroup;
+    public void Awake()
+    {
+        confirmButtonCanvasGroup = confirmButton.GetComponent<CanvasGroup>();
+    }
+    public override void Open()
+    {
+        if (PlayerDataManager.instance.playerData.numOfSupplies[2] < 1)
+        {
+            confirmButtonCanvasGroup.interactable = false;
+        }
+        else
+        {
+            confirmButtonCanvasGroup.interactable = true;
+        }
+        base.Open();
+    }
     public void OnCancelButton()
     {
         base.Close();
@@ -12,6 +30,8 @@ public class ShufflePopup : Popup
     {
         base.Close();
         Shuffle();
+        PlayerDataManager.instance.UpdateNumOfSuppliesData(2, false);
+
     }
 
     public void Shuffle()

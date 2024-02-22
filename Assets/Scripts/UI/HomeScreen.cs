@@ -7,9 +7,8 @@ using UnityEngine;
 public class HomeScreen : UIScreen
 {
     public TextMeshProUGUI bestScore;
-    public override void Awake()
+    public void Awake()
     {
-        base.Awake();
         Messenger.AddListener(EventKey.OnBestScoreChange, UpdateBestScore);
     }
 

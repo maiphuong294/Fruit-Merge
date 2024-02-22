@@ -40,6 +40,7 @@ public class WarningLine : MonoBehaviour
         {
             Debug.Log("ON GAME OVER");
             Messenger.FireEvent(EventKey.OnGameOver);
+            PlayerDataManager.instance.UpdateGoldData(ScoreManager.instance.currentScore / 10);
             Debug.Log("ON GAME OVER 2");
             print(IsChecking);
             IsChecking = false;

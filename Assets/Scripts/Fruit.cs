@@ -42,7 +42,12 @@ public class Fruit : MonoBehaviour
         a.SetActive(false);
         b.SetActive(false);
         if (DataStorage.instance.fruits[size + 1] != null)
-            SpawnObject(middlePoint, size + 1);
+        {
+            AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
+            SpawnObject(middlePoint, size + 1);        
+        }
+            
+
     }
 
     //up 1 size
