@@ -5,6 +5,8 @@ public enum EventKey : byte
     OnGoldChange,
     OnBestScoreChange,
     OnNumOfSuppliesChange,
+    OnCurrentSkinChange,
+    OnSkinOwnedChange,
     OnGameOver,
     OnPlayGame
     

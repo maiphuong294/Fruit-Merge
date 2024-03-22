@@ -12,6 +12,9 @@ public class PlayerData
 
     public int[] numOfSupplies = new int[5];
     public bool[] settings = new bool[5];
+
+    public int currentSkinIndex;
+    public bool[] skinOwned = new bool[10];
     
 
 }

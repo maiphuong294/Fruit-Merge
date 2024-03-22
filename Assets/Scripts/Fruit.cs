@@ -41,7 +41,7 @@ public class Fruit : MonoBehaviour
         Vector3 middlePoint = Vector3.Lerp(a.transform.position, b.transform.position, 0.5f);
         a.SetActive(false);
         b.SetActive(false);
-        if (DataStorage.instance.fruits[size + 1] != null)
+        if (DataStorage.instance.currentObjects[size + 1] != null)
         {
             AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
             SpawnObject(middlePoint, size + 1);        
@@ -54,7 +54,7 @@ public class Fruit : MonoBehaviour
     public void UpgradeObject()
     {
         Vector3 middlePoint = transform.position;  
-        if (DataStorage.instance.fruits[size + 1] != null)
+        if (DataStorage.instance.currentObjects[size + 1] != null)
             SpawnObject(middlePoint, size + 1);
         gameObject.SetActive(false);
     }
@@ -93,12 +93,11 @@ public class Fruit : MonoBehaviour
     public void setSize(int size)
     {
         this.size = size;
-        Debug.Log("Set size " + size);
     }
 
     public void setSkin(int size)
     {
-        Sprite a = DataStorage.instance.fruits[size];
+        Sprite a = DataStorage.instance.currentObjects[size];
         spriteRenderer.sprite = a;
     }
     public void setScale(int size)
@@ -124,7 +123,7 @@ public class Fruit : MonoBehaviour
             target = globalScale;
         }
 
-        Debug.Log("global".Color("yellow") + globalScale + "target".Color("red") + target, gameObject);
+        //Debug.Log("global".Color("yellow") + globalScale + "target".Color("red") + target, gameObject);
         transform.DOKill();
         transform.localScale = Vector3.zero;
         transform.DOScale(target, 0.2f)

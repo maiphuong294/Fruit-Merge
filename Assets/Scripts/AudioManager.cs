@@ -25,6 +25,11 @@ public class AudioManager : MonoBehaviour
     public void Awake()
     {
         instance = this;
+
+    }
+    public void Start()
+    {
+        musicAudioSource.volume = 0.8f;
     }
     public void PlaySound(AudioClip sound)
     {
@@ -45,4 +50,14 @@ public class AudioManager : MonoBehaviour
     {
         musicAudioSource.Stop();
     }
+
+    public void UpdateSoundVolume(float volume)
+    {
+        soundAudioSource.volume = volume;
+    }
+    public void UpdateMusicVolume(float volume)
+    {
+        musicAudioSource.volume = volume;
+    }
+
 }

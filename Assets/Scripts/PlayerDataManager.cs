@@ -22,6 +22,8 @@ public class PlayerDataManager : MonoBehaviour
         LoadData();
         Messenger.FireEvent(EventKey.OnGoldChange);
         Messenger.FireEvent(EventKey.OnBestScoreChange);
+        Messenger.FireEvent(EventKey.OnSkinOwnedChange);
+        Messenger.FireEvent(EventKey.OnCurrentSkinChange, playerData.currentSkinIndex);
         for (int i = 0; i < 4; i++)
         {
             Messenger.FireEvent(EventKey.OnNumOfSuppliesChange, i);
@@ -35,7 +37,7 @@ public class PlayerDataManager : MonoBehaviour
     public void InitPlayerData()
     {
         playerData = new PlayerData();
-        playerData.gold = 0;
+        playerData.gold = 5000;
         playerData.bestScore = 0;
         for(int i = 0; i < playerData.numOfSupplies.Length; i++)
         {
@@ -45,6 +47,13 @@ public class PlayerDataManager : MonoBehaviour
         {
             playerData.settings[i] = true;
         }
+        playerData.currentSkinIndex = 0;
+        playerData.skinOwned[0] = true;
+        for(int i = 1; i < playerData.skinOwned.Length; i++)
+        {
+            playerData.skinOwned[i] = false;
+        }
+
         print("init new player data");
     }
 
@@ -59,6 +68,20 @@ public class PlayerDataManager : MonoBehaviour
         int currentScore = ScoreManager.instance.currentScore;
         playerData.bestScore = (currentScore > playerData.bestScore) ? currentScore : playerData.bestScore;
         Messenger.FireEvent(EventKey.OnBestScoreChange);
+    }
+
+    public void UpdateSkinOwned(int index)
+    {
+        playerData.skinOwned[index] = true;
+        Messenger.FireEvent(EventKey.OnSkinOwnedChange);
+    }
+    public void UpdateCurrentSkin(int index)
+    {
+        if (playerData.skinOwned[index]) { 
+            playerData.currentSkinIndex = index;
+            Messenger.FireEvent(EventKey.OnCurrentSkinChange, playerData.currentSkinIndex);
+        }
+        
     }
     public void UpdateNumOfSuppliesData(int index, bool isAdded)
     {
