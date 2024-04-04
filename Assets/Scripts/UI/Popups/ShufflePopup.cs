@@ -72,7 +72,7 @@ public class ShufflePopup : Popup
     }
     public void SpawnObject(Vector3 position, int size)
     {
-        GameObject a = ObjectPool.instance.GetFromPool();
+        GameObject a = ObjectPool.instance.GetFromObjectPool();
         a.GetComponent<Fruit>().spawnSetup(size, position);
     }
 }

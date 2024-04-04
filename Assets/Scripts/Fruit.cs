@@ -44,7 +44,14 @@ public class Fruit : MonoBehaviour
         if (DataStorage.instance.currentObjects[size + 1] != null)
         {
             AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
-            SpawnObject(middlePoint, size + 1);        
+            SpawnObject(middlePoint, size + 1);
+            ScoreManager.instance.comboCounter += 1;
+            if (ScoreManager.instance.comboCounter >= 1)
+            {
+                Debug.Log("Combo " + ScoreManager.instance.comboCounter);
+                Messenger.FireEvent(EventKey.OnShowCombo, ScoreManager.instance.comboCounter - 1);
+            }
+            Messenger.FireEvent(EventKey.OnUpCoinSlider);
         }
             
 
@@ -62,8 +69,13 @@ public class Fruit : MonoBehaviour
     public void SpawnObject(Vector3 position, int size)
     {
         //GameObject a = Instantiate(DataStorage.instance.objectPrefab, position, Quaternion.identity);
-        GameObject a = ObjectPool.instance.GetFromPool();
+        GameObject a = ObjectPool.instance.GetFromObjectPool();
         a.GetComponent<Fruit>().spawnSetup(size, position);
+        ParticleSystem effect = ObjectPool.instance.GetFromParticleSystemPool();
+        effect.transform.position = position;
+        effect.transform.localScale =Vector3.one * 2f * DataStorage.instance.sizes[size];
+        effect.Play();
+
     }
 
     public void spawnSetup(int size, Vector3 position)

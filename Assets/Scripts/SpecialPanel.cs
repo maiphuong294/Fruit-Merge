@@ -37,6 +37,7 @@ public class SpecialPanel : MonoBehaviour
             AudioManager.instance.PlaySound(AudioManager.instance.coin);
             PlayerDataManager.instance.UpdateGoldData(-prices[index]);
             PlayerDataManager.instance.UpdateNumOfSuppliesData(index, true);
+            Messenger.FireEvent(EventKey.OnPayCoinEffect);
         }
         print("on purchase button");
     }

@@ -12,6 +12,7 @@ public class DestroyPopup : Popup
     }
     public override void Open()
     {
+        Debug.Log("open destroy popup");
         if (PlayerDataManager.instance.playerData.numOfSupplies[0] < 1)
         {
             confirmButtonCanvasGroup.interactable = false;

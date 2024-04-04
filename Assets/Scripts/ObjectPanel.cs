@@ -1,9 +1,11 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPanel : MonoBehaviour
 {
+    public GameObject[] itemHolder = new GameObject[10];
     public GameObject[] greyCover = new GameObject[10];
     public GameObject[] priceHolder = new GameObject[10];
     public GameObject[] tick = new GameObject[10];
@@ -29,6 +31,7 @@ public class ObjectPanel : MonoBehaviour
         {
             PlayerDataManager.instance.UpdateCurrentSkin(index);
             AudioManager.instance.PlayClickButtonSound();
+            PickEffect(index);
             return;
             //use already owned skin
         }
@@ -40,6 +43,8 @@ public class ObjectPanel : MonoBehaviour
             PlayerDataManager.instance.UpdateCurrentSkin(index);
             PlayerDataManager.instance.UpdateGoldData(-prices[index]);
             AudioManager.instance.PlaySound(AudioManager.instance.coin);
+            Messenger.FireEvent(EventKey.OnPayCoinEffect);
+            PickEffect(index);
         }
     }
 
@@ -49,7 +54,11 @@ public class ObjectPanel : MonoBehaviour
         for (int i = 0; i < numOfSkins; i++)
         {
             if (i == index) tick[i].SetActive(true);
-            else tick[i].SetActive(false);  
+            else
+            {
+                tick[i].SetActive(false);
+                itemHolder[i].transform.localScale = Vector3.one;
+            }
         }
         print("on tick " + index);
     }
@@ -62,6 +71,10 @@ public class ObjectPanel : MonoBehaviour
                 greyCover[i].SetActive(false);
             else greyCover[i].SetActive(true);  
         }
+    }
+
+    private void PickEffect(int id) {
+        itemHolder[id].transform.DOScale(1.02f, 0.2f).SetEase(Ease.InOutSine);
     }
 
 

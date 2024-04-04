@@ -35,7 +35,7 @@ public class Cloud : MonoBehaviour
 
     public Fruit SpawnFruit(Vector3 position, int size)
     {
-        GameObject fruitObject = ObjectPool.instance.GetFromPool();
+        GameObject fruitObject = ObjectPool.instance.GetFromObjectPool();
         Fruit fruit = fruitObject.GetComponent<Fruit>();
         fruit.Attach(this.transform);
         fruit.spawnSetup(size, position);

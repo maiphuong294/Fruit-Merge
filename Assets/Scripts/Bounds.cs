@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Bounds : MonoBehaviour
 {
-    void Start()
+
+    public void Start()
     {
         float worldSpriteWidth = GetComponent<SpriteRenderer>().sprite.bounds.size.x;
 
@@ -20,7 +21,9 @@ public class Bounds : MonoBehaviour
 
 
         transform.localScale = newScale;
+
+
     }
 
-    
+
 }

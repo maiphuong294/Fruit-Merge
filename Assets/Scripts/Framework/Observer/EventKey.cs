@@ -8,6 +8,12 @@ public enum EventKey : byte
     OnCurrentSkinChange,
     OnSkinOwnedChange,
     OnGameOver,
-    OnPlayGame
+    OnPlayGame,
+    OnShowCombo,
+    OnUpCoinSlider,
+    OnPayCoinEffect,
+    OnEarnCoinEffect,
+    OnCurrentBackgroundChange,
+    OnBackgroundOwnedChange,
     
 }

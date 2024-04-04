@@ -15,6 +15,12 @@ public class PlayerData
 
     public int currentSkinIndex;
     public bool[] skinOwned = new bool[10];
+
+    public int currentBackgroundIndex;
+    public bool[] backgroundOwned = new bool[10];
+
+    public string lastClaimDay;
+    public int currentDayReward;
     
 
 }

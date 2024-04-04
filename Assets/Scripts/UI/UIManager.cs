@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+    static public UIManager instance { get; private set; }
     public UIScreen homeScreen;
     public UIScreen playScreen;
     public UIScreen storeScreen;
+    public override void Awake()
+    {
+        base.Awake();
+        instance = this;
+    }
     public void Start()
     {
         OpenHomeScreen();
-        
+
     }
     public void OpenHomeScreen()
     {
@@ -34,4 +40,5 @@ public class UIManager : Singleton<UIManager>
         storeScreen.Appear();
         AudioManager.instance.PlayMusic(AudioManager.instance.shopMusic);
     }
+
 }

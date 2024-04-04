@@ -24,10 +24,11 @@ public class PlayerDataManager : MonoBehaviour
         Messenger.FireEvent(EventKey.OnBestScoreChange);
         Messenger.FireEvent(EventKey.OnSkinOwnedChange);
         Messenger.FireEvent(EventKey.OnCurrentSkinChange, playerData.currentSkinIndex);
+        Messenger.FireEvent(EventKey.OnBackgroundOwnedChange);
+        Messenger.FireEvent(EventKey.OnCurrentBackgroundChange, playerData.currentBackgroundIndex);
         for (int i = 0; i < 4; i++)
         {
             Messenger.FireEvent(EventKey.OnNumOfSuppliesChange, i);
-            print("fire event onNumofSupplies change");
         }
     }
 
@@ -47,12 +48,23 @@ public class PlayerDataManager : MonoBehaviour
         {
             playerData.settings[i] = true;
         }
+        //skin
         playerData.currentSkinIndex = 0;
         playerData.skinOwned[0] = true;
         for(int i = 1; i < playerData.skinOwned.Length; i++)
         {
             playerData.skinOwned[i] = false;
         }
+        //background
+        playerData.currentBackgroundIndex = 0;
+        playerData.backgroundOwned[0] = true;
+        for (int i = 1; i < playerData.backgroundOwned.Length; i++)
+        {
+            playerData.backgroundOwned[i] = false;
+        }
+        //dailyreward
+        playerData.lastClaimDay = "";
+        playerData.currentDayReward = 0;
 
         print("init new player data");
     }
@@ -82,6 +94,22 @@ public class PlayerDataManager : MonoBehaviour
             Messenger.FireEvent(EventKey.OnCurrentSkinChange, playerData.currentSkinIndex);
         }
         
+    }
+
+    public void UpdateBackgroundOwned(int index)
+    {
+        playerData.backgroundOwned[index] = true;
+        Messenger.FireEvent(EventKey.OnBackgroundOwnedChange);
+    }
+
+    public void UpdateCurrentBackground(int index)
+    {
+        if (playerData.backgroundOwned[index])
+        {
+            playerData.currentBackgroundIndex = index;
+            print("update current background in playdatamanger" + index);
+            Messenger.FireEvent(EventKey.OnCurrentBackgroundChange, index);
+        }
     }
     public void UpdateNumOfSuppliesData(int index, bool isAdded)
     {

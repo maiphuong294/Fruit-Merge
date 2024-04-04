@@ -7,8 +7,14 @@ public class ObjectPool : MonoBehaviour
     public static ObjectPool instance {  get; private set; }
     [SerializeField] private GameObject prefab;
     [SerializeField] private List<GameObject> pool = new List<GameObject>();
+
+    [SerializeField] private ParticleSystem psPrefab;
+    [SerializeField] private List<ParticleSystem> psPool = new List<ParticleSystem>();
     private int numOfElements = 10;
     private int currentNumOfElements;
+
+    private int psNumOfElements = 20;
+    private int psCurrentNumOfElements;
     private void Awake()
     {
         instance = this;
@@ -20,8 +26,14 @@ public class ObjectPool : MonoBehaviour
             pool.Add(CreateObject());
         }
         currentNumOfElements = numOfElements;
+
+        for (int i = 1; i <= psNumOfElements; i++)
+        {
+            psPool.Add(CreateParticleSystem());
+        }
+        psCurrentNumOfElements = psNumOfElements;
     }
-    public GameObject GetFromPool()
+    public GameObject GetFromObjectPool()
     {
         for (int i = 0; i < currentNumOfElements; i++)
         {
@@ -56,7 +68,31 @@ public class ObjectPool : MonoBehaviour
             }
         }
         return list;
-    } 
+    }
 
-    
+    public ParticleSystem CreateParticleSystem()
+    {
+        ParticleSystem a = Instantiate(psPrefab, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        a.Clear();
+        return a;
+    }
+    public ParticleSystem GetFromParticleSystemPool()
+    {
+        for (int i = 0; i < psCurrentNumOfElements; i++)
+        {
+            if (!psPool[i].isPlaying)
+            {
+                psPool[i].Clear();
+                return psPool[i];
+            }
+        }
+        ParticleSystem a = CreateParticleSystem();
+        psPool.Add(a);
+        psCurrentNumOfElements++;
+        return a;
+    }
+
+
+
+
 }
