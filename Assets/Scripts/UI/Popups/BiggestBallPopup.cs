@@ -54,5 +54,11 @@ public class BiggestBallPopup : Popup
         }
         if (maxID == -1) return;
         list[maxID].SetActive(false);
+        ParticleSystem effect = ObjectPool.instance.GetFromParticleSystemPool();
+        effect.transform.position = list[maxID].transform.position;
+        int sizee = list[maxID].GetComponent<Fruit>().getSize();
+        effect.transform.localScale = Vector3.one * 2f * DataStorage.instance.sizes[sizee];
+        effect.Play();
+        AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
     }
 }

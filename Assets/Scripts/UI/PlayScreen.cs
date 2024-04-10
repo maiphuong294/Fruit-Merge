@@ -9,17 +9,33 @@ public class PlayScreen : UIScreen
     public TextMeshProUGUI currentScore;
     public TextMeshProUGUI gold;
     public TextMeshProUGUI[] numOfSupplies = new TextMeshProUGUI[5];
+    public bool isLoadFruitsFromJson;
     public void Awake()
     {
         Messenger.AddListener<int>(EventKey.OnNumOfSuppliesChange, UpdateNumOfSuppliesText);
         Messenger.AddListener(EventKey.OnGoldChange, UpdateGoldText);
+        Messenger.AddListener(EventKey.OnCurrentScoreChange, UpdateCurrentScore);
     }
 
     public void Start()
-    {
-        Messenger.AddListener(EventKey.OnCurrentScoreChange, UpdateCurrentScore);
+    {   
         UpdateGoldText();
     }
+
+    public void UpdateCurrentFruits()
+    {
+        if (isLoadFruitsFromJson)
+        {
+            ObjectPool.instance.UpdateCurrentFruits();
+            isLoadFruitsFromJson = false;
+        }
+    }
+
+    public void UpdateIsLoadFruitsFromJson()
+    {
+        isLoadFruitsFromJson = true;
+    }
+
 
     public void UpdateCurrentScore()
     {

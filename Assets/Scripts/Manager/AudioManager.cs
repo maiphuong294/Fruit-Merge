@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
     }
     public void Start()
     {
-        musicAudioSource.volume = 0.8f;
+        musicAudioSource.volume = 0.7f;
     }
     public void PlaySound(AudioClip sound)
     {
@@ -54,10 +54,16 @@ public class AudioManager : MonoBehaviour
     public void UpdateSoundVolume(float volume)
     {
         soundAudioSource.volume = volume;
+        if (volume == 0f)
+            PlayerDataManager.instance.playerData.settings[0] = false;
+        else PlayerDataManager.instance.playerData.settings[0] = true;
     }
     public void UpdateMusicVolume(float volume)
     {
         musicAudioSource.volume = volume;
+        if (volume == 0f)
+            PlayerDataManager.instance.playerData.settings[1] = false;
+        else PlayerDataManager.instance.playerData.settings[1] = true;
     }
 
 }

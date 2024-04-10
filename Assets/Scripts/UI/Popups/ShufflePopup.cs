@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ShufflePopup : Popup
@@ -34,7 +35,7 @@ public class ShufflePopup : Popup
 
     }
 
-    public void Shuffle()
+    public async void Shuffle()
     {   
         //remove holding Object
         List<GameObject> list = ObjectPool.instance.GetActiveObjects();
@@ -66,13 +67,19 @@ public class ShufflePopup : Popup
         //shuffle
         for (int i = 0; i < list.Count; i++)
         {
-            list[i].SetActive(false);
+            list[i].SetActive(false);         
+        }
+        for (int i = 0; i < list.Count; i++)
+        {
+            await Task.Delay(30);
             SpawnObject(positions[b[i]], sizes[i]);
         }
+
     }
     public void SpawnObject(Vector3 position, int size)
     {
         GameObject a = ObjectPool.instance.GetFromObjectPool();
         a.GetComponent<Fruit>().spawnSetup(size, position);
+        AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
     }
 }

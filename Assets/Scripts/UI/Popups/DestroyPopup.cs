@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class DestroyPopup : Popup
 {
@@ -33,22 +36,30 @@ public class DestroyPopup : Popup
         Destroy();
         PlayerDataManager.instance.UpdateNumOfSuppliesData(0, false);
     }
-    public void Destroy()
+    public async void Destroy()
     {
         List<GameObject> list = ObjectPool.instance.GetActiveObjects();
         if (Cloud.instance.HoldingFruit != null)
         {
             list.Remove(Cloud.instance.HoldingFruit.gameObject);
-        }  
+        }
         HashSet<int> set = new HashSet<int>();
         while(set.Count < 4 && set.Count < list.Count)
         {
             set.Add(Random.Range(0, list.Count));
         }
-        foreach(int i in set)
+        foreach (int i in set)
         {
             list[i].SetActive(false);
+            AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
+            ParticleSystem effect = ObjectPool.instance.GetFromParticleSystemPool();
+            effect.transform.position = list[i].transform.position;
+            int size = list[i].GetComponent<Fruit>().getSize();
+            effect.transform.localScale = Vector3.one * 2f * DataStorage.instance.sizes[size];
+            effect.Play();
+            await Task.Delay(100);
         }
+
     }
 
 }

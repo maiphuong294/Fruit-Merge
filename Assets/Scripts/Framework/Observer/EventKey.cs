@@ -7,6 +7,7 @@ public enum EventKey : byte
     OnNumOfSuppliesChange,
     OnCurrentSkinChange,
     OnSkinOwnedChange,
+    OnSettingStatusChange,
     OnGameOver,
     OnPlayGame,
     OnShowCombo,
@@ -15,5 +16,8 @@ public enum EventKey : byte
     OnEarnCoinEffect,
     OnCurrentBackgroundChange,
     OnBackgroundOwnedChange,
+    OnUpdateCurrentFruits,
+    OnUpdateCurrentScore,
+    OnUpdateCoinSliderValue
     
 }

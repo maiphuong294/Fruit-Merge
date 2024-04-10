@@ -21,11 +21,8 @@ public class ObjectPool : MonoBehaviour
     }
     void Start()
     {   
-        for (int i = 1; i <= numOfElements; i++)
-        {
-            pool.Add(CreateObject());
-        }
-        currentNumOfElements = numOfElements;
+
+        
 
         for (int i = 1; i <= psNumOfElements; i++)
         {
@@ -92,7 +89,18 @@ public class ObjectPool : MonoBehaviour
         return a;
     }
 
-
-
-
+    public void UpdateCurrentFruits()
+    {
+        for (int i = 0; i <  PlayerDataManager.instance.playerData.numFruits; i++)
+        {
+            GameObject a = Instantiate(prefab, PlayerDataManager.instance.playerData.fruitPositions[i], Quaternion.identity);
+            a.GetComponent<Fruit>().spawnSetup(PlayerDataManager.instance.playerData.fruitSizes[i], a.transform.position);
+            pool.Add(a);
+        }
+        while(pool.Count < numOfElements) 
+        {
+            pool.Add(CreateObject());
+        }
+        currentNumOfElements = pool.Count;
+    }
 }

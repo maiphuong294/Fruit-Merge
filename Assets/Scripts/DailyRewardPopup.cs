@@ -1,3 +1,4 @@
+using DG.Tweening;
 using JetBrains.Annotations;
 using System;
 using System.Collections;
@@ -9,7 +10,9 @@ using UnityEngine.UI;
 public class DailyRewardPopup : Popup
 {
     public Button[] buttons = new Button[10];
+    public GameObject[] greyCover = new GameObject[10];
     private DateTime lastClaimDay;
+    public Color enableColor, unEnableColor;
     public override void Start()
     {
         base.Start();
@@ -44,6 +47,8 @@ public class DailyRewardPopup : Popup
     {
         int currentDay = PlayerDataManager.instance.playerData.currentDayReward;
         buttons[currentDay].enabled = true;
+        buttons[currentDay].GetComponent<Image>().color = enableColor;
+        buttons[currentDay].transform.DOScale(1.05f, 0.5f).SetEase(Ease.InSine).SetLoops(-1, LoopType.Yoyo);
     }
     public void OnClickButton(int id)
     {
@@ -58,9 +63,12 @@ public class DailyRewardPopup : Popup
     public void UpdateTickedButton(int id)
     {
         Debug.Log("update tick button " + id);
+        greyCover[id].SetActive(true);
         buttons[id].enabled = true;
         buttons[id].interactable = false;
         buttons[id].transform.Find("Tick Icon").gameObject.SetActive(true);
+        buttons[id].transform.DOKill();
+        buttons[id].transform.localScale = Vector3.one;
     }
 
     public void Setup()
@@ -69,6 +77,8 @@ public class DailyRewardPopup : Popup
         {
             buttons[i].enabled = false;
             buttons[i].transform.Find("Tick Icon").gameObject.SetActive(false);
+            buttons[i].GetComponent<Image>().color = unEnableColor;
+            greyCover[i].SetActive(false);
         }
     }
 }

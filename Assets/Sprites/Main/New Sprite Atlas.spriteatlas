@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Sprite Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 47
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 8
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 464bcd9cfb7c66f428ce698b4ee90c14, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 321a55807fff26e489317e5d106db9fc, type: 3}
+  - {fileID: 21300000, guid: 7e6423c0b2d10e0438ebf1a9a740a110, type: 3}
+  - {fileID: 21300000, guid: cb28c731ce2218b40b393a98ee019c75, type: 3}
+  - {fileID: 21300000, guid: cfe045b1fd7fdef40a0943e83cee46d9, type: 3}
+  - {fileID: 21300000, guid: a1dff0d16c148124faf8d165bc8bcaa0, type: 3}
+  - {fileID: 21300000, guid: 95f48212974d179468154cf907fe0651, type: 3}
+  - {fileID: 21300000, guid: 9586dae205c263e41910b85c7b07c874, type: 3}
+  - {fileID: 21300000, guid: 3d4578533f806b54eb12be533a7e42c1, type: 3}
+  - {fileID: 21300000, guid: 23395de4a755662459ab1e420ea50e8f, type: 3}
+  - {fileID: 21300000, guid: 651481f45c5a2a5489ba17970ec12059, type: 3}
+  - {fileID: 21300000, guid: ed671935b7449a94fa80c7df60743ff8, type: 3}
+  - {fileID: 21300000, guid: 616151754bf0ee64eb64d470bb4e38b2, type: 3}
+  - {fileID: 21300000, guid: 76802a75c2bc7b541a2d484894739c85, type: 3}
+  - {fileID: 21300000, guid: 94696cb5458d7d14ca86793514696b6b, type: 3}
+  - {fileID: 21300000, guid: ec86d0c51888af446a6c45e21c2302a5, type: 3}
+  - {fileID: 21300000, guid: f691eb36606159b4fa31b3cce29db97d, type: 3}
+  - {fileID: 21300000, guid: 1856fed6f9c3fab46b868a1164d68ffb, type: 3}
+  - {fileID: 21300000, guid: 3565afd69a6d64a4593dc5b98838399d, type: 3}
+  - {fileID: 21300000, guid: 6cab422752c691a459c2f3f295a4742c, type: 3}
+  - {fileID: 21300000, guid: 0c2e5e776b14b124ea02633096368d0b, type: 3}
+  - {fileID: 21300000, guid: c59aee97c393a40489f21c0850774b3e, type: 3}
+  - {fileID: 21300000, guid: 921e1968408fa4b4585a46b22a341f20, type: 3}
+  - {fileID: 21300000, guid: 2c6aa9b850e9bf24cb35854d5412f75e, type: 3}
+  - {fileID: 21300000, guid: 595c9ce9ccaa5f84798f2565bf5aa9ac, type: 3}
+  - {fileID: 21300000, guid: 5cb7aef91fdad3b4cbba7b0f75820f35, type: 3}
+  - {fileID: 21300000, guid: 0f18349ae6b64274c809a9989c3a3eab, type: 3}
+  - {fileID: 21300000, guid: c5288c9a0ab7e2341b5ebb07ba21443a, type: 3}
+  - {fileID: 21300000, guid: 08f751baf39d90547bcabe3ffae20f15, type: 3}
+  - {fileID: 21300000, guid: ec3a4cead6d843e47923d628b535a808, type: 3}
+  - {fileID: 21300000, guid: 6257f91bb0bd28146a43457560a5a100, type: 3}
+  - {fileID: 21300000, guid: 4847dd6b285fd3042aa33e52bc504b24, type: 3}
+  - {fileID: 21300000, guid: d5d411bb83040954dad6eb897f83eafc, type: 3}
+  - {fileID: 21300000, guid: 51fc13cb8303cc241b42b78b13356b36, type: 3}
+  - {fileID: 21300000, guid: 6edb64cbf824d74468fc9d313a844620, type: 3}
+  - {fileID: 21300000, guid: 73c8eacb0f809794fb2138053a9fe68f, type: 3}
+  - {fileID: 21300000, guid: fb57b64c1a173e8458008ba0112c730d, type: 3}
+  - {fileID: 21300000, guid: cb35757c9d9577346b2775869b300743, type: 3}
+  - {fileID: 21300000, guid: 718d539ce92d8474a856d55665c2dbf1, type: 3}
+  - {fileID: 21300000, guid: 72b3ed2df07ae5b4c820d62496333d84, type: 3}
+  - {fileID: 21300000, guid: 4f611a3ec698d24419f23de6ecfbbf77, type: 3}
+  - {fileID: 21300000, guid: 6c419a8ea7b311c4d8089e3242c928b2, type: 3}
+  - {fileID: 21300000, guid: 54dd042f2b1bf0f498d27f865657246e, type: 3}
+  - {fileID: 21300000, guid: 4d4cf87feab2e494e944e6f3df68c4ca, type: 3}
+  - {fileID: 21300000, guid: 581274dfe2e2e3d4baae9d158c9bc2cd, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Thanh progres2
+  - hand
+  - destroy1
+  - thanh coin 1
+  - +
+  - _ (1)
+  - video (1)
+  - khung1
+  - Thanh progress 1
+  - destroy
+  - video
+  - top
+  - cloud
+  - x
+  - Coin (1) (1)
+  - khoa
+  - thanh coin 2
+  - Yes.
+  - Khung BR
+  - box2
+  - video (2)
+  - bomb (1)
+  - Ray
+  - sparkle3
+  - Sun
+  - khung-1
+  - revive
+  - collection
+  - x 50
+  - Thanh progres2 (1)
+  - Next khung
+  - bomb
+  - Shuffer
+  - box1
+  - balloon
+  - backgroud 1
+  - free video.
+  - figure 1
+  - thanh coin 3
+  - ShufferIcon
+  - Khung score
+  - Finger 2 (1)
+  - _
+  - get x2
+  m_RenderDataMap: {}
+  m_Tag: New Sprite Atlas
+  m_IsVariant: 0

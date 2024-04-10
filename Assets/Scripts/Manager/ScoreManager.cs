@@ -10,7 +10,9 @@ public class ScoreManager : MonoBehaviour
     public float comboTimer;
     public void Awake()
     {
-        instance = this; 
+        instance = this;
+        Messenger.AddListener<int>(EventKey.OnUpdateCurrentScore, SetScore);
+
     }
     public void Start()
     {
@@ -27,6 +29,12 @@ public class ScoreManager : MonoBehaviour
             comboTimer = 0f;
             comboCounter = -1;
         }
+    }
+
+    public void SetScore(int score)
+    {
+        currentScore = score;
+        Messenger.FireEvent(EventKey.OnCurrentScoreChange);
     }
 
     public void AddScore(int score)

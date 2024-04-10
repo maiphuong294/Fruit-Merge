@@ -26,6 +26,7 @@ public class GameOverPopup : Popup
         base.Close();
         Messenger.FireEvent(EventKey.OnPlayGame);
         ScoreManager.instance.ResetScore();
+        CoinSlider.instance.ResetCoinSlider();
         AudioManager.instance.PlayMusic(AudioManager.instance.playMusic);
         DestroyAllBalls();  
     }

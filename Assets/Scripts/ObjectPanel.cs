@@ -68,8 +68,16 @@ public class ObjectPanel : MonoBehaviour
         for (int i = 0; i < numOfSkins; i++)
         {
             if (PlayerDataManager.instance.playerData.skinOwned[i])
+            {
                 greyCover[i].SetActive(false);
-            else greyCover[i].SetActive(true);  
+                priceHolder[i].SetActive(false);
+            }
+
+            else
+            {
+                greyCover[i].SetActive(true);
+                priceHolder[i].SetActive(true);
+            }
         }
     }
 

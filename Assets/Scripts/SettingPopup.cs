@@ -5,21 +5,27 @@ using UnityEngine.UI;
 
 public class SettingPopup : Popup
 {
-    public Slider soundSlider;
-    public Slider musicSlider;
-
+    public SoundToggle soundToggle;
+    public MusicToggle musicToggle;
     public void Awake()
     {
-        soundSlider.onValueChanged.AddListener(UpdateSoundVolume);
-        musicSlider.onValueChanged.AddListener(UpdateMusicVolume);
+        Messenger.AddListener(EventKey.OnSettingStatusChange, UpdateSettingStatus);
+    }
+    public void UpdateSettingStatus()
+    {
+        //update sound
+        if (PlayerDataManager.instance.playerData.settings[0])
+        {
+            soundToggle.OffSoundButton();
+        } else soundToggle.OnSoundButton();
+
+        //update music
+        if (PlayerDataManager.instance.playerData.settings[1])
+        {
+            musicToggle.OffMusicButton();
+        }
+        else musicToggle.OnMusicButton();
+
     }
 
-    public void UpdateSoundVolume(float volume)
-    {
-        AudioManager.instance.UpdateSoundVolume(volume);
-    }
-    public void UpdateMusicVolume(float volume)
-    {
-        AudioManager.instance.UpdateMusicVolume(volume);
-    }
 }

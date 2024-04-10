@@ -45,6 +45,7 @@ public class Cloud : MonoBehaviour
 
     public async void DropObject()
     {
+        print("mouspos = " + getMousePos());
         if (HoldingFruit == null)
             return;
 
@@ -58,13 +59,28 @@ public class Cloud : MonoBehaviour
         await Task.Delay(400);
 
         HoldingFruit = SpawnFruit(holdPoint.transform.position, UnityEngine.Random.Range(1, 4));
+        print("holding fruit position " +  HoldingFruit.transform.position);
         SetHolding(true);
     }
     public void followMouse()
     {
-        Vector3 targetPos = new Vector3(getMousePos().x + distFromHoldPoint, transform.position.y, 0f);
-        transform.position = targetPos;
+        Vector3 mousePos = getMousePos();
+        float fruitTargetXPos = mousePos.x;
+        if (!IsOutOfBound(fruitTargetXPos))
+        {
+            Vector3 cloudTargetPos = new Vector3(mousePos.x + distFromHoldPoint, transform.position.y, 0f);
+            transform.position = cloudTargetPos;
+        }
     }
+
+    public bool IsOutOfBound(float xPos)
+    {
+        float halfWidth = 0.25f;
+        if(xPos - halfWidth < -2.3f || xPos + halfWidth > 2.3f)
+            return true;
+        return false;
+    }
+
     public static bool IsOverUI()
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);

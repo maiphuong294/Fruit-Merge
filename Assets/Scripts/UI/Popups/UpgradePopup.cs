@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class UpgradePopup : Popup
@@ -34,7 +35,7 @@ public class UpgradePopup : Popup
 
     }
 
-    public void UpGrade()
+    public async void UpGrade()
     {
         List<GameObject> list = ObjectPool.instance.GetActiveObjects();
         if (Cloud.instance.HoldingFruit != null)
@@ -49,7 +50,13 @@ public class UpgradePopup : Popup
         foreach (int i in set)
         {
             list[i].GetComponent<Fruit>().UpgradeObject();
-
+            AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
+            ParticleSystem effect = ObjectPool.instance.GetFromParticleSystemPool();
+            effect.transform.position = list[i].transform.position;
+            int size = list[i].GetComponent<Fruit>().getSize();
+            effect.transform.localScale = Vector3.one * 2f * DataStorage.instance.sizes[size];
+            effect.Play();
+            await Task.Delay(100);
         }
     }
 }

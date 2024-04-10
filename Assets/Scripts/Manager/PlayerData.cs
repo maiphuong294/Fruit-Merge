@@ -21,6 +21,15 @@ public class PlayerData
 
     public string lastClaimDay;
     public int currentDayReward;
+
+    public int numFruits;
+    public List<int> fruitSizes = new List<int>();    
+    public List<Vector3> fruitPositions = new List<Vector3>();
+
+    public bool isHaveGameYet;
+
+    public int currentScore;
+    public float coinSliderValue;
     
 
 }

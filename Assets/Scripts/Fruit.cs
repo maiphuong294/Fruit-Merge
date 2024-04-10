@@ -45,6 +45,7 @@ public class Fruit : MonoBehaviour
         {
             AudioManager.instance.PlaySound(AudioManager.instance.mergeObject);
             SpawnObject(middlePoint, size + 1);
+            ScoreManager.instance.AddScore(size * 3);
             ScoreManager.instance.comboCounter += 1;
             if (ScoreManager.instance.comboCounter >= 1)
             {
@@ -53,6 +54,7 @@ public class Fruit : MonoBehaviour
             }
             Messenger.FireEvent(EventKey.OnUpCoinSlider);
         }
+
             
 
     }
@@ -73,7 +75,7 @@ public class Fruit : MonoBehaviour
         a.GetComponent<Fruit>().spawnSetup(size, position);
         ParticleSystem effect = ObjectPool.instance.GetFromParticleSystemPool();
         effect.transform.position = position;
-        effect.transform.localScale =Vector3.one * 2f * DataStorage.instance.sizes[size];
+        effect.transform.localScale = Vector3.one * 2f * DataStorage.instance.sizes[size];
         effect.Play();
 
     }
@@ -85,7 +87,7 @@ public class Fruit : MonoBehaviour
         setSize(size);
         setSkin(size);
         setScale(size);
-        ScoreManager.instance.AddScore(size * 3);
+        
         
         
     }
@@ -143,6 +145,11 @@ public class Fruit : MonoBehaviour
             .OnComplete(() => CanDrop = true);
 
         //Debug.Break();
+    }
+
+    public float getWidth()
+    {
+        return spriteRenderer.bounds.size.x;
     }
 
     public void Attach(Transform parent)

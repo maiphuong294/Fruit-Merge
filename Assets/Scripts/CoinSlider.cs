@@ -20,6 +20,7 @@ public class CoinSlider : MonoBehaviour
         instance = this;
         slider.onValueChanged.AddListener(EarnCoinBonus);
         Messenger.AddListener(EventKey.OnUpCoinSlider, UpSliderValue);
+        Messenger.AddListener<float>(EventKey.OnUpdateCoinSliderValue, SetSliderValue);
     }
 
     void Start()
@@ -77,14 +78,24 @@ public class CoinSlider : MonoBehaviour
     {
         float delay = 0.3f;
         yield return new WaitForSeconds(delay);
-        PlayerDataManager.instance.UpdateGoldData(500);
+        PlayerDataManager.instance.UpdateGoldData(200);
         slider.value = 0f;
         yield break;
     }
 
     public void UpSliderValue()
     {
-        slider.value += 0.1f;
+        slider.value += 0.05f;
+    }
+
+    public void ResetCoinSlider()
+    {
+        slider.value = 0f;
+    }
+
+    public void SetSliderValue(float value)
+    {
+        slider.value = value;
     }
 
 }

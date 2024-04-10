@@ -25,7 +25,12 @@ public class PlayerDataManager : MonoBehaviour
         Messenger.FireEvent(EventKey.OnSkinOwnedChange);
         Messenger.FireEvent(EventKey.OnCurrentSkinChange, playerData.currentSkinIndex);
         Messenger.FireEvent(EventKey.OnBackgroundOwnedChange);
+        Messenger.FireEvent(EventKey.OnSettingStatusChange);
         Messenger.FireEvent(EventKey.OnCurrentBackgroundChange, playerData.currentBackgroundIndex);
+        Messenger.FireEvent(EventKey.OnUpdateCurrentFruits);
+        Messenger.FireEvent(EventKey.OnUpdateCurrentScore, playerData.currentScore);
+        Messenger.FireEvent(EventKey.OnUpdateCoinSliderValue, playerData.coinSliderValue);
+
         for (int i = 0; i < 4; i++)
         {
             Messenger.FireEvent(EventKey.OnNumOfSuppliesChange, i);
@@ -65,6 +70,18 @@ public class PlayerDataManager : MonoBehaviour
         //dailyreward
         playerData.lastClaimDay = "";
         playerData.currentDayReward = 0;
+        //setting
+        playerData.settings[0] = true;
+        playerData.settings[1] = true;
+
+        playerData.numFruits = 0;
+        playerData.fruitSizes = new List<int>();
+        playerData.fruitPositions = new List<Vector3>();
+
+        playerData.isHaveGameYet = false;
+
+        playerData.currentScore = 0;
+        playerData.coinSliderValue = 0f;
 
         print("init new player data");
     }
@@ -119,6 +136,39 @@ public class PlayerDataManager : MonoBehaviour
         Messenger.FireEvent(EventKey.OnNumOfSuppliesChange, index);
     }
 
+    public void UpdateCurrentFruits()
+    {
+        playerData.fruitSizes = new List<int>();
+        playerData.fruitPositions = new List<Vector3>();
+        List<GameObject> currentFruits = ObjectPool.instance.GetActiveObjects();
+        if (Cloud.instance.HoldingFruit != null)
+        {
+            currentFruits.Remove(Cloud.instance.HoldingFruit.gameObject);
+        }
+        for (int i = 0; i < currentFruits.Count; i++)
+        {
+            playerData.fruitSizes.Add(currentFruits[i].GetComponent<Fruit>().getSize());
+            playerData.fruitPositions.Add(currentFruits[i].transform.position);
+        }   
+        playerData.numFruits = currentFruits.Count;
+        print("update current fruits");
+    }
+
+    public void UpdateIsHaveGameYet()
+    {
+        playerData.isHaveGameYet = true;
+    }
+
+    public void SaveCurrentScore()
+    {
+        playerData.currentScore = ScoreManager.instance.currentScore;
+    }
+
+    public void SaveCurrentCoinSliderValue()
+    {
+        playerData.coinSliderValue = CoinSlider.instance.slider.value;
+    }
+
     #endregion
 
 
@@ -140,6 +190,9 @@ public class PlayerDataManager : MonoBehaviour
     }
     public void SaveData()
     {
+        UpdateCurrentFruits();
+        SaveCurrentScore();
+        SaveCurrentCoinSliderValue();
         string savePlayerData = JsonUtility.ToJson(playerData);
         File.WriteAllText(saveFilePath, savePlayerData);
         Debug.Log("Save file created at: " + saveFilePath);
