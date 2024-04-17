@@ -18,6 +18,8 @@ public enum EventKey : byte
     OnBackgroundOwnedChange,
     OnUpdateCurrentFruits,
     OnUpdateCurrentScore,
-    OnUpdateCoinSliderValue
+    OnUpdateCoinSliderValue,
+    OnGamePlay,
+    OnUpdateSkin
     
 }

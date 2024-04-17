@@ -18,16 +18,16 @@ public class ScoreManager : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         currentScore = 0;
-        comboCounter = -1;
+        comboCounter = 0;
         comboTimer = 0f;
     }
 
     public void Update()
     {
         if (comboCounter > 0) comboTimer += Time.deltaTime;
-        if (comboTimer > 0.8f) {
+        if (comboTimer > 0.7f) {
             comboTimer = 0f;
-            comboCounter = -1;
+            comboCounter = 0;
         }
     }
 

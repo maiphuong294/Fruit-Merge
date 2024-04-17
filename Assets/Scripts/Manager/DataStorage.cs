@@ -13,9 +13,10 @@ public class DataStorage : MonoBehaviour
     [Header ("Size")]
     [Range(0f, 0.5f)]
     public float[] sizes = new float[12];
+    public float scale1, scale2, colliderRadius1, colliderRadius2;
 
     [Header ("Current Skin")]
-    public Sprite[] currentObjects = new Sprite[12];
+    public Sprite[] currentSprites = new Sprite[12];
 
 
     [Header ("Skin Data")]
@@ -37,22 +38,28 @@ public class DataStorage : MonoBehaviour
         skins.Add(candies);
         skins.Add(meows);
         Messenger.AddListener<int>(EventKey.OnCurrentSkinChange, UpdateSkin);
+        scale1 = 1f;
+        scale2 = 1.28f;
+        colliderRadius1 = 2.56f;
+        colliderRadius2 = 2f;
 
     }
 
     public void UpdateSkin(int index)
     {
-        Array.Copy((Array)skins[index], currentObjects, 12);
+        Array.Copy((Array)skins[index], currentSprites, 12);
         print("update current objects " + index);
-        UpdateCurrentObjectSkin();
+        UpdateCurrentObjectSkin(index);
+        Messenger.FireEvent(EventKey.OnUpdateSkin);
     }
-    public void UpdateCurrentObjectSkin()
+    public void UpdateCurrentObjectSkin(int index)
     {
         List<GameObject> list = ObjectPool.instance.GetActiveObjects();
         foreach (GameObject obj in list)
         {
             var fruit = obj.GetComponent<Fruit>();
             fruit.setSkin(fruit.getSize());
+            fruit.setScale(fruit.getSize());
         }
     }
 }

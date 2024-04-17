@@ -22,14 +22,17 @@ public class UpgradePopup : Popup
             confirmButtonCanvasGroup.interactable = true;
         }
         base.Open();
+        UIManager.instance.SetIsGamePlay(false);
     }
     public void OnCancelButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
     }
     public void OnConfirmButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
         UpGrade();
         PlayerDataManager.instance.UpdateNumOfSuppliesData(1, false);
 

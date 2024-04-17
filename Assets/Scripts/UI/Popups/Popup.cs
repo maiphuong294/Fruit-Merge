@@ -14,6 +14,7 @@ public class Popup : MonoBehaviour
 
     public virtual void Open()
     {
+        gameObject.transform.localScale = Vector3.zero;
         greyBackground.SetActive(true); 
         gameObject.transform.DOScale(Vector3.one, 0.3f)
             .SetEase(Ease.OutBack);
@@ -21,10 +22,8 @@ public class Popup : MonoBehaviour
     }
     public virtual void Close()
     {
-        greyBackground.SetActive(false);
-        //gameObject.SetActive(false);
         gameObject.transform.DOScale(Vector3.zero, 0.3f)
-            .SetEase(Ease.InBack); 
+            .SetEase(Ease.InBack).OnComplete(() => greyBackground.SetActive(false)); 
     }
 
 }

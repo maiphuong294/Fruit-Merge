@@ -9,26 +9,29 @@ public class GameOverPopup : Popup
     [SerializeField] private TextMeshProUGUI bestScoreText;
     public void Awake()
     {
-        Messenger.AddListener(EventKey.OnGameOver, UpdateCurrentScore);
+        Messenger.AddListener(EventKey.OnGameOver, UpdateCurrentScoreText);
         Messenger.AddListener(EventKey.OnGameOver, Open);
-        UpdateCurrentBestScore();
+        
     }
     public override void Open()
     {
         base.Open();
         AudioManager.instance.PlaySound(AudioManager.instance.gameOver);
         AudioManager.instance.StopMusic();
+        UpdateCurrentBestScoreText();
         PlayerDataManager.instance.UpdateBestScoreData();
+        UIManager.instance.SetIsGamePlay(false);
     }
     public void OnReplayButton()
     {
-        UpdateCurrentBestScore();
+        UpdateCurrentBestScoreText();
         base.Close();
         Messenger.FireEvent(EventKey.OnPlayGame);
         ScoreManager.instance.ResetScore();
         CoinSlider.instance.ResetCoinSlider();
         AudioManager.instance.PlayMusic(AudioManager.instance.playMusic);
-        DestroyAllBalls();  
+        DestroyAllBalls();
+        UIManager.instance.SetIsGamePlay(true);
     }
     public void OnAdsButton()
     {
@@ -49,12 +52,20 @@ public class GameOverPopup : Popup
         }
     }
 
-    public void UpdateCurrentScore()
+    public void UpdateCurrentScoreText()
     {
         currentScoreText.SetText(ScoreManager.instance.currentScore.ToString());
     }
-    public void UpdateCurrentBestScore()
+    public void UpdateCurrentBestScoreText()
     {
-        bestScoreText.SetText("BEST: " + PlayerDataManager.instance.playerData.bestScore.ToString());
+        if (ScoreManager.instance.currentScore > PlayerDataManager.instance.playerData.bestScore)
+        {
+            bestScoreText.SetText("NEW BEST: " + ScoreManager.instance.currentScore.ToString());
+        }
+        else
+        {
+            bestScoreText.SetText("BEST: " + PlayerDataManager.instance.playerData.bestScore.ToString());
+        }
+        
     }
 }

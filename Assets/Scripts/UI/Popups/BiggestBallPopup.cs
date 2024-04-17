@@ -21,14 +21,17 @@ public class BiggestBallPopup : Popup
             confirmButtonCanvasGroup.interactable = true;
         }
         base.Open();
+        UIManager.instance.SetIsGamePlay(false);
     }
     public void OnCancelButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
     }
     public void OnConfirmButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
         DestroyBiggestBall();
         PlayerDataManager.instance.UpdateNumOfSuppliesData(3, false);
 

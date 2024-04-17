@@ -22,14 +22,17 @@ public class ShufflePopup : Popup
             confirmButtonCanvasGroup.interactable = true;
         }
         base.Open();
+        UIManager.instance.SetIsGamePlay(false);
     }
     public void OnCancelButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
     }
     public void OnConfirmButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
         Shuffle();
         PlayerDataManager.instance.UpdateNumOfSuppliesData(2, false);
 

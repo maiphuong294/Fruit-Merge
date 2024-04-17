@@ -25,14 +25,17 @@ public class DestroyPopup : Popup
             confirmButtonCanvasGroup.interactable = true;
         }
         base.Open();
+        UIManager.instance.SetIsGamePlay(false);
     }
     public void OnCancelButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
     }
     public void OnConfirmButton()
     {
         base.Close();
+        UIManager.instance.SetIsGamePlay(true);
         Destroy();
         PlayerDataManager.instance.UpdateNumOfSuppliesData(0, false);
     }

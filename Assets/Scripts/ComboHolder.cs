@@ -24,6 +24,7 @@ public class ComboHolder : MonoBehaviour
 
     public void ShowCombo(int id)
     {
+        id -= 2;
         float timeFadeOut = 0.4f;
         combo[id].GetComponent<TextMeshProUGUI>().DOFade(1f, timeFadeOut).SetEase(Ease.OutQuad);
         combo[id].transform.DOScale(1f, timeFadeOut).SetEase(Ease.OutQuad);

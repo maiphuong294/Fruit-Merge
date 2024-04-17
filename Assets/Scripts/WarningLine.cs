@@ -23,6 +23,7 @@ public class WarningLine : MonoBehaviour
     }
     public void Update()
     {
+        if (!UIManager.instance.isGamePlay) return;
         if (!IsChecking) return;
         if (duration > 1f)
         {

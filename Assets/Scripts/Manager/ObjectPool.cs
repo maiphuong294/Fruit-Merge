@@ -18,6 +18,7 @@ public class ObjectPool : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        Messenger.AddListener<bool>(EventKey.OnGamePlay, SetIsGamePlay);
     }
     void Start()
     {   
@@ -102,5 +103,30 @@ public class ObjectPool : MonoBehaviour
             pool.Add(CreateObject());
         }
         currentNumOfElements = pool.Count;
+    }
+
+    public void SetIsGamePlay(bool a)
+    {
+        List<GameObject> list = new List<GameObject>();
+        list.AddRange(pool);
+        if (Cloud.instance.HoldingFruit != null)
+        {
+            list.Remove(Cloud.instance.HoldingFruit.gameObject);
+            print("remove holding fruit");
+        }
+            
+        foreach (var obj in list)
+        {
+            Fruit fruit = obj.GetComponent<Fruit>();
+            if (a == true)
+            {
+                fruit.Resume();
+            }
+            else
+            {
+                fruit.Pause();
+            }
+            
+        }
     }
 }

@@ -73,7 +73,7 @@ public class LeaderBoardPopup : Popup
         }
         otherPlayerList.Add(new KeyValuePair<string, int>("Helio", 0));
         otherPlayerList.Sort((x, y) => x.Value - y.Value);
-        for (int i = 0; i < otherPlayerList.Count; i++) print(otherPlayerList[i].Key + otherPlayerList[i].Value);
+       
     }
 
    
